@@ -1,4 +1,4 @@
-fastapi==0.52.0
+fastapi
 gunicorn
 uvicorn
 numpy==1.18.2
