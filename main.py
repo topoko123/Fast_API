@@ -102,7 +102,26 @@ async def validation_email(text):
     else:
         return False
     
+@app.get("/bmi")
+async def bmi(h:int=1, w:int=0 ):
+    h = (h/100)**2
+    bmi = w/h
+    des = ""
     
+    if (bmi < 18.5):
+        des = "น้ำหนักต่ำกว่าเกณฑ์"
+    elif (bmi >= 18.5 and bmi <= 22.9 ):
+        des = "สมส่วน"
+    elif (bmi >=23.0 and 24.9):
+        des = "น้ำหนักเกิน"
+    elif (bmi >=25.0 and 29.9):
+        des ="โรคอ้วน"
+    else :
+        des = "โรคอ้วนอันตราย"
+
+    js = {'bmi':f'{bmi:.2f}', 'description': des}
+    return js
+
 @app.get("/google-search",response_class=PlainTextResponse)
 def google_search(text):
     
