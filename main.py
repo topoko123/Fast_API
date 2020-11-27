@@ -121,6 +121,62 @@ async def bmi(h:int=1, w:int=0 ):
 
     js = {'bmi':f'{bmi:.2f}', 'description': des}
     return js
+    
+@app.get("/basenum")
+async def basenumber(a:str = 0, b:str = ""):
+    
+    base = b.upper()
+    result = ""
+    result2 = ""
+    #Base Number :Binary to Decimal
+    if (base == "B2D"):   
+        x = a.isdigit()
+        if (x == False):
+            result = "ไม่ได้กรอกเลขฐานสอง"
+        else :
+            result = int (a, 2)
+
+    #Base Number :Decimal to Binary        
+    elif (base == "D2B"):
+        x = a.isdigit()
+        if (x == False):
+            result = "ไม่ได้กรอกเลขฐานสิบ"
+        elif (x == True) :
+            result = bin(int(a)).replace("0b", "")
+        else : 
+            result = "error"
+
+    #Base number :Binary to Hex
+    elif (base == "D2H"):  
+        x = a.isdigit()
+        if (x == False):
+            result = "ไม่ได้กรอกเลขฐานสิบ"
+        elif (x == True):
+            result = hex(int(a)).replace("0x","").upper()
+        else :
+            result = "error"
+    #Base Number :Decimal to Ocetal
+    elif (base == "D2O"):
+        x = a.isdigit()
+        if (x == False):
+            result = "ไม่ได้กรอกเลขฐานสิบ"
+        elif (x == True):
+            result2 = int(a, 2)
+            result = oct(int(result2)).replace("0o", "")
+        else :
+            result = "error"
+    
+    #Base Number :Hex to Decimal
+    elif (base == "H2D"):        
+        if (re.search('[0-9a-fA-F]', a)):
+            result = int (a, 16)
+        else :
+            result = "คุณกรอกเลขฐานสิบหกไม่ถูกต้อง"
+    else :
+        result = "error"    
+
+    jsonout = {'result2':result2, 'result':result}
+    return jsonout
 
 @app.get("/google-search",response_class=PlainTextResponse)
 def google_search(text):
