@@ -124,58 +124,97 @@ async def bmi(h:int=1, w:int=0 ):
     
 @app.get("/basenum")
 async def basenumber(a:str = 0, b:str = ""):
-    
     base = b.upper()
-    result = ""
+    result1 = ""
     result2 = ""
-    #Base Number :Binary to Decimal
-    if (base == "B2D"):   
-        x = a.isdigit()
-        if (x == False):
-            result = "ไม่ได้กรอกเลขฐานสอง"
-        else :
-            result = int (a, 2)
+    #Base Number :Binary,Dec,Oce
+    try:
+        if (base == "B2O"):   
+            x = a.isdigit()
+            if (x == False):
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+            else :
+                result1 = "ฐานสิบ: "+ str(int (a, 2))
+                result2 = "ฐานแปด: "+ str(oct(int(result1)).replace("0o", ""))
 
-    #Base Number :Decimal to Binary        
-    elif (base == "D2B"):
-        x = a.isdigit()
-        if (x == False):
-            result = "ไม่ได้กรอกเลขฐานสิบ"
-        elif (x == True) :
-            result = bin(int(a)).replace("0b", "")
-        else : 
-            result = "error"
+        #Base Number :Binary,Dec,Hex      
+        elif (base == "B2H"):
+            x = a.isdigit()
+            if (x == False):
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+            elif (x == True) :
+                result1 = "ฐานสิบ: "+ str(int (a, 2))
+                result2 = "ฐานสิบหก: "+ str(hex(int(result1)).replace("0x","").upper())           
+                # bin(int(a)).replace("0b", "")       
+            else : 
+                result1 ="กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+        #Base number :Oct,binary,dec
+        elif (base == "O2B"):  
+            if (re.search('[0-9]', a)):
+                result1 = "ฐานสิบ: "+ str(int(a, 8))
+                result2 = "ฐานสอง: "+ str(bin(int(result1)).replace("0b", ""))
+            else :
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+        #Base number :Oct,Dec,Hex
+        elif (base == "O2H"):
+            if (re.search('[0-9]', a)):
+                result1 = "ฐานสิบ: "+ str(int(a, 8))
+                result2 = "ฐานสิบหก: "+ str(hex(int(result1)).replace("0x","").upper())
+            else :
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+        #Base Number :Decimal to Ocetal
+        elif (base == "H2B"):           
+            if (re.search('[0-9a-fA-F]', a)):
+                result1 = "ฐานสิบ: "+ str(int(a, 16))
+                result2 = "ฐานสอง: "+ str(bin(int(result1)).replace("0b", ""))
+            else:
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+        #Base Number :Hex to Decimal
+        elif (base == "H2O"):        
+            if (re.search('[0-9a-fA-F]', a)):
+                result1 = "ฐานสิบ: "+ str(int(a, 16))
+                result2 = "ฐานแปด: "+ str(oct(int(result1)).replace("0o", ""))
+            else :
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+        #Base Number :Dec,Binary,Oct
+        elif (base == "D2B"):
+            x = a.isdigit()
+            if (x == False):
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+            elif (x == True):
+                nbdec = int(a)
+                result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
+                result2 = "ฐานแปด: "+ str(oct(int(nbdec)).replace("0o", ""))
+            else:
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+        #Base Number : Dec,Binary,HEX
+        elif (base == "D2H"):
+            x = a.isdigit()
+            if (x == False):                
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+            elif (x == True):
+                nbdec = int(a)
+                result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
+                result2 = "ฐานสิบหก: "+ str(hex(int(nbdec)).replace("0x", "").upper())
+        else :
+            result1 = "กรอกไม่ถูกต้อง"    
+            result2 = "กรอกไม่ถูกต้อง"
+    except Exception as e:
+        print (e,type(e))
 
-    #Base number :Binary to Hex
-    elif (base == "D2H"):  
-        x = a.isdigit()
-        if (x == False):
-            result = "ไม่ได้กรอกเลขฐานสิบ"
-        elif (x == True):
-            result = hex(int(a)).replace("0x","").upper()
-        else :
-            result = "error"
-    #Base Number :Decimal to Ocetal
-    elif (base == "D2O"):
-        x = a.isdigit()
-        if (x == False):
-            result = "ไม่ได้กรอกเลขฐานสิบ"
-        elif (x == True):
-            result2 = int(a, 2)
-            result = oct(int(result2)).replace("0o", "")
-        else :
-            result = "error"
-    
-    #Base Number :Hex to Decimal
-    elif (base == "H2D"):        
-        if (re.search('[0-9a-fA-F]', a)):
-            result = int (a, 16)
-        else :
-            result = "คุณกรอกเลขฐานสิบหกไม่ถูกต้อง"
-    else :
-        result = "error"    
 
-    jsonout = {'result2':result2, 'result':result}
+    print (result1, result2)
+    jsonout = {'Number1':result1, 'Number2':result2}
     return jsonout
 
 @app.get("/google-search",response_class=PlainTextResponse)
