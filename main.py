@@ -130,65 +130,71 @@ async def basenumber(a:str = 0, b:str = ""):
     #Base Number :Binary,Dec,Oce
     try:
         if (base == "B2O"):   
-            x = a.isdigit()
-            if (x == False):
+            if (re.search('[0-9]', a)):
+                res = int(a, 2)
+                result1 = "ฐานสิบ: "+ str(int (a, 2))
+                result2 = "ฐานแปด: "+ oct(int(res)).replace("0o", "")
+            else :
                 result1 = "กรอกไม่ถูกต้อง"
                 result2 = "กรอกไม่ถูกต้อง"
-            else :
-                result1 = "ฐานสิบ: "+ str(int (a, 2))
-                result2 = "ฐานแปด: "+ str(oct(int(result1)).replace("0o", ""))
 
         #Base Number :Binary,Dec,Hex      
         elif (base == "B2H"):
-            x = a.isdigit()
-            if (x == False):
+            
+            if (re.search('[0-1]', a)):
+                res = int(a, 2)
+                result1 = "ฐานสิบ: "+ str(int (a, 2))
+                result2 = "ฐานสิบหก: " + hex(int(res)).replace("0x","").upper() 
+            else :
                 result1 = "กรอกไม่ถูกต้อง"
                 result2 = "กรอกไม่ถูกต้อง"
-            elif (x == True) :
-                result1 = "ฐานสิบ: "+ str(int (a, 2))
-                result2 = "ฐานสิบหก: "+ str(hex(int(result1)).replace("0x","").upper())           
-                # bin(int(a)).replace("0b", "")       
-            else : 
-                result1 ="กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                
         #Base number :Oct,binary,dec
         elif (base == "O2B"):  
             if (re.search('[0-9]', a)):
+                res = int(a, 8)
                 result1 = "ฐานสิบ: "+ str(int(a, 8))
-                result2 = "ฐานสอง: "+ str(bin(int(result1)).replace("0b", ""))
+                result2 = "ฐานสอง: "+ bin(int(res)).replace("0b", "")
             else :
                 result1 = "กรอกไม่ถูกต้อง"
                 result2 = "กรอกไม่ถูกต้อง"
+                
         #Base number :Oct,Dec,Hex
         elif (base == "O2H"):
             if (re.search('[0-9]', a)):
+                res = int(a, 8)
                 result1 = "ฐานสิบ: "+ str(int(a, 8))
-                result2 = "ฐานสิบหก: "+ str(hex(int(result1)).replace("0x","").upper())
+                result2 = "ฐานสิบหก: "+ hex(int(res)).replace("0x","").upper()
             else :
                 result1 = "กรอกไม่ถูกต้อง"
                 result2 = "กรอกไม่ถูกต้อง"
+                
         #Base Number :Decimal to Ocetal
         elif (base == "H2B"):           
             if (re.search('[0-9a-fA-F]', a)):
+                res = int(a, 16)
                 result1 = "ฐานสิบ: "+ str(int(a, 16))
-                result2 = "ฐานสอง: "+ str(bin(int(result1)).replace("0b", ""))
+                result2 = "ฐานสอง: "+ bin(int(res)).replace("0b", "")
             else:
                 result1 = "กรอกไม่ถูกต้อง"
                 result2 = "กรอกไม่ถูกต้อง"
+                
         #Base Number :Hex to Decimal
         elif (base == "H2O"):        
             if (re.search('[0-9a-fA-F]', a)):
-                result1 = "ฐานสิบ: "+ str(int(a, 16))
-                result2 = "ฐานแปด: "+ str(oct(int(result1)).replace("0o", ""))
+                res = int(a, 16)
+                result1 = "ฐานสิบ"+ str(int(a, 16))
+                result2 = "ฐานแปด" + oct(int(res)).replace("0o", "")
             else :
                 result1 = "กรอกไม่ถูกต้อง"
                 result2 = "กรอกไม่ถูกต้อง"
+                
         #Base Number :Dec,Binary,Oct
-        elif (base == "D2B"):
+        elif (base == "D2O"):
             x = a.isdigit()
             if (x == False):
                 result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                
             elif (x == True):
                 nbdec = int(a)
                 result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
@@ -196,23 +202,39 @@ async def basenumber(a:str = 0, b:str = ""):
             else:
                 result1 = "กรอกไม่ถูกต้อง"
                 result2 = "กรอกไม่ถูกต้อง"
+                
         #Base Number : Dec,Binary,HEX
         elif (base == "D2H"):
             x = a.isdigit()
             if (x == False):                
                 result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                
             elif (x == True):
                 nbdec = int(a)
                 result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
                 result2 = "ฐานสิบหก: "+ str(hex(int(nbdec)).replace("0x", "").upper())
         else :
-            result1 = "กรอกไม่ถูกต้อง"    
-            result2 = "กรอกไม่ถูกต้อง"
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"    
+        
+        #Base Number :Dec,Binary
+        if (base == "D2B"):
+            x = a.isdigit()
+            if (x == False):                
+                result1 = "กรอกไม่ถูกต้อง"
+                
+            elif (x == True):
+                nbdec = int(a)
+                result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
+                result2 = "ไม่มีเลขฐานแล้ว  :p"
+        else :
+                result1 = "กรอกไม่ถูกต้อง"
+                result2 = "กรอกไม่ถูกต้อง"
+
     except Exception as e:
         print (e,type(e))
-
-
+        result1 = "กรอกไม่ถูกต้อง"
+        result2 = "กรอกไม่ถูกต้อง"
     print (result1, result2)
     jsonout = {'Number1':result1, 'Number2':result2}
     return jsonout
