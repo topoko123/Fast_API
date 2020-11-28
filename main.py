@@ -226,7 +226,7 @@ async def basenumber(a:str = 0, b:str = ""):
             elif (x == True):
                 nbdec = int(a)
                 result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
-                result2 = "ไม่มีเลขฐานแล้ว  :p"
+                result2 = "ไม่มีเลขฐานแล้ว :p"
         else :
                 result1 = "กรอกไม่ถูกต้อง"
                 result2 = "กรอกไม่ถูกต้อง"
