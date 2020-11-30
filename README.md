@@ -1,6 +1,6 @@
 # Clone from conan-fastapi
 
-## การใช้งาน fucntion Converted Base Number 
+## การใช้งาน Base Conversion function
 
 >โดยเราจะมาเริ่มกันที่ คำสั่งในการแปลงเลชฐานแต่ละคำสั่ง
 
