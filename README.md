@@ -1,5 +1,3 @@
-# Clone from conan-fastapi
-
 ## การใช้งาน Base Conversion Function
 
 >โดยเราจะมาเริ่มกันที่ คำสั่งในการแปลงเลชฐานแต่ละคำสั่ง
@@ -20,3 +18,4 @@
 
 * https://thanwafastapi12.herokuapp.com/docs#/default/basenumber_basenum_get 
 
+## Git Pull and Fork From  Javakung/conan-fastapi: https://github.com/javakung/conan-fastapi.git 
