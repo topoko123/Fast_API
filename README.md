@@ -16,5 +16,7 @@
 
 
 
-### โดยสามารถมาลองใช้งานได้ที่นี่ https://thanwafastapi12.herokuapp.com/docs#/default/basenumber_basenum_get 
-ตัวอย่างการสร้าง Python API ด้วย FastAPI 
+### โดยสามารถมาลองใช้งานได้ที่นี่ 
+
+* https://thanwafastapi12.herokuapp.com/docs#/default/basenumber_basenum_get 
+
