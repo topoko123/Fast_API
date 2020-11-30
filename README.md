@@ -17,7 +17,8 @@
 ### โดยสามารถมาลองใช้งานได้ที่นี่ 
 
 * https://thanwafastapi12.herokuapp.com/docs#/default/basenumber_basenum_get 
-   \a = เลขฐานที่เราจะใส่ \
-   \b = คำสั่งจากด้านบน \
+
+   \a = เลขฐานที่เราจะใส่\
+    \b = คำสั่งจากด้านบน\
 
 * Git Pull and Fork From  Javakung/conan-fastapi: https://github.com/javakung/conan-fastapi.git 
