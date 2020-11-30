@@ -123,120 +123,121 @@ async def bmi(h:int=1, w:int=0 ):
     return js
     
 @app.get("/basenum")
-async def basenumber(a:str = 0, b:str = ""):
-    base = b.upper()
-    result1 = ""
-    result2 = ""
+async def basenumber(BaseNumberInput:str = 0, BaseNumberFunction:str = ""):
+    BaseNumberFunction_ = BaseNumberFunction.upper()
+    ResultFirstRow_ = ""
+    ResultSecondRow_ = ""
     #Base Number :Binary,Dec,Oce
     try:
-        if (base == "B2O"):   
-            if (re.search('[0-9]', a)):
-                res = int(a, 2)
-                result1 = "ฐานสิบ: "+ str(int (a, 2))
-                result2 = "ฐานแปด: "+ oct(int(res)).replace("0o", "")
+        if (BaseNumberFunction_ == "B2O"):   
+            if (re.search('[0-9]', BaseNumberInput)):
+                BinToDec_ = int(BaseNumberInput, 2)
+                ResultFirstRow_ = "ฐานสิบ: "+ str(int (BaseNumberInput, 2))
+                ResultSecondRow_ = "ฐานแปด: "+ oct(int(BinToDec_)).replace("0o", "")
             else :
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+               ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+               ResultSecondRow_ = "กรอกไม่ถูกต้อง"
 
         #Base Number :Binary,Dec,Hex      
-        elif (base == "B2H"):
+        elif (BaseNumberFunction_ == "B2H"):
             
-            if (re.search('[0-1]', a)):
-                res = int(a, 2)
-                result1 = "ฐานสิบ: "+ str(int (a, 2))
-                result2 = "ฐานสิบหก: " + hex(int(res)).replace("0x","").upper() 
+            if (re.search('[0-1]', BaseNumberInput)):
+                BinToDec_ = int(BaseNumberInput, 2)
+                ResultFirstRow_ = "ฐานสิบ: "+ str(int (BaseNumberInput, 2))
+                ResultSecondRow_ = "ฐานสิบหก: " + hex(int(BinToDec_)).replace("0x","").upper() 
             else :
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+                ResultSecondRow_ = "กรอกไม่ถูกต้อง"
                 
         #Base number :Oct,binary,dec
-        elif (base == "O2B"):  
-            if (re.search('[0-9]', a)):
-                res = int(a, 8)
-                result1 = "ฐานสิบ: "+ str(int(a, 8))
-                result2 = "ฐานสอง: "+ bin(int(res)).replace("0b", "")
+        elif (BaseNumberFunction_ == "O2B"):  
+            if (re.search('[0-9]', BaseNumberInput)):
+                OctToDec_ = int(BaseNumberInput, 8)
+                ResultFirstRow_ = "ฐานสิบ: "+ str(int(BaseNumberInput, 8))
+                ResultSecondRow_ = "ฐานสอง: "+ bin(int(OctToDec_)).replace("0b", "")
             else :
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+                ResultSecondRow_ = "กรอกไม่ถูกต้อง"
                 
         #Base number :Oct,Dec,Hex
-        elif (base == "O2H"):
-            if (re.search('[0-9]', a)):
-                res = int(a, 8)
-                result1 = "ฐานสิบ: "+ str(int(a, 8))
-                result2 = "ฐานสิบหก: "+ hex(int(res)).replace("0x","").upper()
+        elif (BaseNumberFunction_ == "O2H"):
+            if (re.search('[0-9]', BaseNumberInput)):
+                OctToDec_ = int(BaseNumberInput, 8)
+                ResultFirstRow_ = "ฐานสิบ: "+ str(int(BaseNumberInput, 8))
+                ResultSecondRow_ = "ฐานสิบหก: "+ hex(int(OctToDec_)).replace("0x","").upper()
             else :
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+                ResultSecondRow_ = "กรอกไม่ถูกต้อง"
                 
-        #Base Number :Decimal to Ocetal
-        elif (base == "H2B"):           
-            if (re.search('[0-9a-fA-F]', a)):
-                res = int(a, 16)
-                result1 = "ฐานสิบ: "+ str(int(a, 16))
-                result2 = "ฐานสอง: "+ bin(int(res)).replace("0b", "")
+        #Base Number :Hec to Bin
+        elif (BaseNumberFunction_ == "H2B"):           
+            if (re.search('[0-9a-fA-F]', BaseNumberInput)):
+                HexToDec_ = int(BaseNumberInput, 16)
+                ResultFirstRow_ = "ฐานสิบ: "+ str(int(BaseNumberInput, 16))
+                ResultSecondRow_ = "ฐานสอง: "+ bin(int(HexToDec_)).replace("0b", "")
             else:
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+                ResultSecondRow_ = "กรอกไม่ถูกต้อง"
                 
         #Base Number :Hex to Decimal
-        elif (base == "H2O"):        
-            if (re.search('[0-9a-fA-F]', a)):
-                res = int(a, 16)
-                result1 = "ฐานสิบ"+ str(int(a, 16))
-                result2 = "ฐานแปด" + oct(int(res)).replace("0o", "")
+        elif (BaseNumberFunction_ == "H2O"):        
+            if (re.search('[0-9a-fA-F]', BaseNumberInput)):
+                HexToDec_ = int(BaseNumberInput, 16)
+                ResultFirstRow_ = "ฐานสิบ"+ str(int(BaseNumberInput, 16))
+                ResultSecondRow_ = "ฐานแปด" + oct(int(HexToDec_)).replace("0o", "")
             else :
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+                ResultSecondRow_ = "กรอกไม่ถูกต้อง"
                 
         #Base Number :Dec,Binary,Oct
-        elif (base == "D2O"):
-            x = a.isdigit()
-            if (x == False):
-                result1 = "กรอกไม่ถูกต้อง"
+        elif (BaseNumberFunction_ == "D2O"):
+            InputFilter_ = BaseNumberInput.isdigit()
+            if (InputFilter_ == False):
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
                 
-            elif (x == True):
-                nbdec = int(a)
-                result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
-                result2 = "ฐานแปด: "+ str(oct(int(nbdec)).replace("0o", ""))
+            elif (InputFilter_ == True):
+                _InDecimal = int(BaseNumberInput)
+                ResultFirstRow_ = "ฐานสอง: "+ str(bin(int(_InDecimal)).replace("0b", ""))
+                ResultSecondRow_ = "ฐานแปด: "+ str(oct(int(_InDecimal)).replace("0o", ""))
             else:
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+                ResultSecondRow_ = "กรอกไม่ถูกต้อง"
                 
         #Base Number : Dec,Binary,HEX
-        elif (base == "D2H"):
-            x = a.isdigit()
-            if (x == False):                
-                result1 = "กรอกไม่ถูกต้อง"
+        elif (BaseNumberFunction_ == "D2H"):
+            InputFilter_ = BaseNumberInput.isdigit()
+            if (InputFilter_ == False):                
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
                 
-            elif (x == True):
-                nbdec = int(a)
-                result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
-                result2 = "ฐานสิบหก: "+ str(hex(int(nbdec)).replace("0x", "").upper())
-        else :
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"    
+            elif (InputFilter_ == True):
+                _InDecimal = int(BaseNumberInput)
+                ResultFirstRow_ = "ฐานสอง: "+ str(bin(int(_InDecimal)).replace("0b", ""))
+                ResultSecondRow_ = "ฐานสิบหก: "+ str(hex(int(_InDecimal)).replace("0x", "").upper())
+            else :
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+                ResultSecondRow_ = "กรอกไม่ถูกต้อง"    
         
         #Base Number :Dec,Binary
-        if (base == "D2B"):
-            x = a.isdigit()
-            if (x == False):                
-                result1 = "กรอกไม่ถูกต้อง"
+        elif (BaseNumberFunction_ == "D2B"):
+            InputFilter_ = BaseNumberInput.isdigit()
+            if (InputFilter_ == False):                
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
                 
-            elif (x == True):
-                nbdec = int(a)
-                result1 = "ฐานสอง: "+ str(bin(int(nbdec)).replace("0b", ""))
-                result2 = "ไม่มีเลขฐานแล้ว :p"
+            elif (InputFilter_ == True):
+                _InDecimal = int(BaseNumberInput)
+                ResultFirstRow_ = "ฐานสอง: "+ str(bin(int(_InDecimal)).replace("0b", ""))
+                ResultSecondRow_ = "ไม่มีเลขฐานแล้ว  :p"
         else :
-                result1 = "กรอกไม่ถูกต้อง"
-                result2 = "กรอกไม่ถูกต้อง"
+                ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+                ResultSecondRow_ = "กรอกไม่ถูกต้อง"
 
     except Exception as e:
         print (e,type(e))
-        result1 = "กรอกไม่ถูกต้อง"
-        result2 = "กรอกไม่ถูกต้อง"
-    print (result1, result2)
-    jsonout = {'Number1':result1, 'Number2':result2}
+        ResultFirstRow_ = "กรอกไม่ถูกต้อง"
+        ResultSecondRow_ = "กรอกไม่ถูกต้อง"
+    
+    print (ResultFirstRow_, ResultSecondRow_)
+    jsonout = {'Number1':ResultFirstRow_, 'Number2':ResultSecondRow_}
     return jsonout
 
 @app.get("/google-search",response_class=PlainTextResponse)
