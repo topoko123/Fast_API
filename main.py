@@ -9,8 +9,19 @@ import math
 import requests
 from bs4 import BeautifulSoup
 from fastapi.responses import PlainTextResponse
+from fastapi.middleware.cors import CORSMiddleware
+
+
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def result(res):
     return {"result":res}
