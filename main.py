@@ -234,7 +234,8 @@ async def basenumber(BaseNumberInput:str = 0, BaseNumberFunction:str = ""):
                 status = "invalid input"
     except Exception as e:
         print (e,type(e))
-        result = "invalid input"
+        result = ""
+        status = "invalid input"
     jsonout = {'source':BaseNumberInput, 'base':BaseNumberFunction_ , 'result': result,'status' : status}
     return jsonout
 
